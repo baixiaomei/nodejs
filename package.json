@@ -1,0 +1,22 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.6.1",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "mongodb": "^3.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "event": "node event_emitter.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

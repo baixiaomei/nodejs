@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      .comment_list{
+        padding:50px;
+        width:100%;
+        }
+
+        .comment_list button{
+        margin:5px 0;
+        padding:5px;
+        border:1px solid transparent;
+        outline:none;
+        }
+
+        .comment_list table{
+        width:100%;
+        border:1px solid #e6e6e6;
+        border-collapse: collapse;
+        }
+
+      .comment_list table tr th{
+        text-align:left;
+        line-height: 30px;
+        font-size: 16px;
+        background:#ccc;
+        color:#000;
+        border:1px solid #e6e6e6;
+        padding:5px;
+      }
+
+      .comment_list table tr td{
+        border:1px solid #e6e6e6;
+        padding:5px;
+      }
+
+      .comment_list button{
+        margin:5px 0;
+      }
+
+      .page{
+        margin:20px 0;
+      }
+
+    </style>
+  </head>
+  <script>
+    // var data = []
+    // fetch('/comment/commentlist')
+    // .then(function (response) {
+    //   return response.json()
+    // })
+    // .then(function (res) {
+    //   data = res
+    // })
+    // .catch(function (e) {
+    //   console.log(e)
+    // })
+  </script>
+  <body>
+      <%- include('header', {title: '评论展示'}) %>
+      <div class='comment_list'>
+        <button onclick="location.href='/comment/'">添加评论</button>
+        <table>
+          <colgroup>
+            <col width='10%'>
+            <col width='40%'>
+            <col />
+          </colgroup>
+          <tr>
+            <th>序号</th>
+            <th>标题</th>
+            <th>内容</th>
+          </tr>
+          <% for (var i = 0; i < data.length; i++) { %>
+            <tr>
+              <td><%- i+1 %></td>
+              <td><a href="/comment/detail?id=<%= data[i].id %>"><%- data[i].title %></a></td>
+              <td><%- data[i].content %></td>
+            </tr>
+            <% } %>
+        </table>
+        <div class='page'>
+          <a href="/comment/commentlist?pageNo=1">首页</a>
+          <a href="/comment/commentlist?pageNo=<%= pageNo > totalPage ? pageNo -1 : 1 %>">上一页</a>
+          <a href="/comment/commentlist?pageNo=<%= pageNo < totalPage ? pageNo +1 : totalPage %>">下一页</a>
+          <a href="/comment/commentlist?pageNo=<%= totalPage %>">尾页</a>
+          <a href=""><%= pageNo %>/ <%= totalPage %> </a>
+          <a href="">共 <%= count %> 条数据</a>
+        </div>
+      </div>
+  </body>
+</html>

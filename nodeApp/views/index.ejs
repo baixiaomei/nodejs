@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('header', {title: '首页'}) %>
+      <div class='index'>
+        <button onclick="location.href='/comment/commentlist'">评论</button>
+        <button onclick="location.href='/login'">登录</button>
+        <button onclick="location.href='/register'">注册</button>
+      </div>
+  </body>
+</html>

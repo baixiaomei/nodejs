@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+    <title><%= title %></title>
+    <script src="/javascripts/xheditor-1.2.2/jquery/jquery-1.11.2.min.js"></script>
+    <script src="/javascripts/xheditor-1.2.2/xheditor-1.2.2.min.js"></script>
+    <script src="/javascripts/xheditor-1.2.2/xheditor_lang/zh-cn.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+      <%- include('header', {title: '评论添加'}) %>
+      <div class='comment_add'>
+        <form  action="/comment/submit" method='post' id='formDemo'>
+          <label for="">
+            标题： <input type="text" name='title', value=''>
+          </label>
+          <label for="">
+            内容： <textarea name="content" id="content" cols="120" rows="20"></textarea>
+          </label>
+          <label for="">
+            <input type="submit" value='提交' name='submit' />
+          </label>
+        </form>
+      </div>
+  </body>
+  <script>
+    pageInit()
+    function pageInit () {
+      // jquery扩展 提交表单
+      $.extend(XHEDITOR.settings, {shortcuts: {'ctrl+enter': submitForm}})
+      $('#content').xheditor({
+        html5Upload: false,
+        upMultiple: '1',
+        upImgUrl: '/comment/uploadImg',
+        upImgExt: "jpg,jpeg,gif,bmp,png",
+        onUpload: insertUpload
+      })
+    }
+
+    // 上传图片的处理
+    function insertUpload (arrMsg) {
+      var i, msg
+      for (var i = 0; i < arrMsg.length; i++) {
+        msg = arrMsg[i]
+        $('#uploadList').append('<option value="'+ msg.id +'">'+ msg.localname +'</option>')
+      }
+    }
+
+    function submitForm () {
+      $('#formDemo').submit()
+    }
+  </script>
+</html>
